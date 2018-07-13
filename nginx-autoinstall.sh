@@ -424,14 +424,16 @@ case $OPTION in
 		--conf-path=/etc/nginx/nginx.conf \
 		--error-log-path=/var/log/nginx/error.log \
 		--http-log-path=/var/log/nginx/access.log \
-		--pid-path=/var/run/nginx.pid \
-		--lock-path=/var/run/nginx.lock \
+        --pid-path=/run/nginx.pid \
+		--lock-path=/run/nginx.lock \
 		--http-client-body-temp-path=/var/cache/nginx/client_temp \
 		--http-proxy-temp-path=/var/cache/nginx/proxy_temp \
 		--http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
 		--user=nginx \
 		--group=nginx \
-		--with-cc-opt=-Wno-deprecated-declarations"
+		--with-cc-opt=-DNGX_HTTP_HEADERS -g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -fPIC -Wdate-time -D_FORTIFY_SOURCE=2 -Wno-deprecated-declarations \
+        --with-ld-opt=-Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now -fPIC" 
+
 
 
 		NGINX_MODULES="--without-http_ssi_module \
@@ -442,6 +444,13 @@ case $OPTION in
 		--without-http_memcached_module \
 		--without-http_empty_gif_module \
 		--without-http_browser_module \
+        --with-debug \
+        --with-pcre-jit \
+        --with-http_gunzip_module \
+        --with-http_gzip_static_module \
+        --with-stream=dynamic \
+        --with-stream_ssl_module \
+        --with-stream_ssl_preread_module \
 		--with-threads \
 		--with-file-aio \
 		--with-http_ssl_module \
