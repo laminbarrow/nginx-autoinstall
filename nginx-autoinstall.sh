@@ -421,7 +421,7 @@ case $OPTION in
 		NGINX_OPTIONS="
 		--prefix=/etc/nginx \
 		--sbin-path=/usr/sbin/nginx \
-		--conf-path=/etc/nginx/nginx.conf \
+		--conf-path=/etc/nginx.conf \
 		--error-log-path=/var/log/nginx/error.log \
 		--http-log-path=/var/log/nginx/access.log \
         --pid-path=/run/nginx.pid \
@@ -700,7 +700,7 @@ case $OPTION in
 	exit
 	;;
 	3) # Update the script
-		wget https://raw.githubusercontent.com/Angristan/nginx-autoinstall/master/nginx-autoinstall.sh -O nginx-autoinstall.sh >> /tmp/nginx-autoinstall.log 2>&1
+		wget https://raw.githubusercontent.com/laminbarrow/nginx-autoinstall/master/nginx-autoinstall.sh -O nginx-autoinstall.sh >> /tmp/nginx-autoinstall.log 2>&1
 		chmod +x nginx-autoinstall.sh
 		echo ""
 		echo -e "${CGREEN}Update succcessful !${CEND}"
